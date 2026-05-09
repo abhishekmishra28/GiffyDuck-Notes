@@ -114,6 +114,7 @@ GiffyDuck/
 
 ## Prerequisites
 - Node.js 18+
+- Express.js
 - MongoDB
 - npm
 
