@@ -1,4 +1,5 @@
 import { api } from './axios';
+import { useAuthStore } from '@/store/authStore';
 import type {
   ChatResponse,
   ChatsResponse,
@@ -44,7 +45,7 @@ export function sendMessageStream(
   onDone: () => void,
   onError: (error: Error) => void
 ) {
-  const token = localStorage.getItem('token');
+  const token = useAuthStore.getState().token;
   const url = `http://localhost:5000/api/ai/message/stream`;
 
   fetch(url, {

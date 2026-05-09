@@ -154,11 +154,25 @@ exports.updateNote = async (req,res) => {
                 message : "Note not Found."
             });
         }
+
+        const contentChanged = (title !== undefined && title !== note.title) ||
+                               (content !== undefined && content !== note.content);
+
         if(title        != undefined) note.title        = title;
         if(content      != undefined) note.content      = content;
         if(tags         != undefined) note.tags         = tags;
         if(isPinned     != undefined) note.isPinned     = isPinned;
         if(isArchived   != undefined) note.isArchived   = isArchived;
+
+        // Re-generate embedding if content or title changed
+        if (contentChanged) {
+            try {
+                const text = `${note.title} ${note.content}`.slice(0, 2000);
+                note.embedding = await getEmbedding(text);
+            } catch (err) {
+                console.error("Embedding update failed:", err.message);
+            }
+        }
 
         await note.save();
 

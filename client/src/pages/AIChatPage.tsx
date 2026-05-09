@@ -6,6 +6,7 @@ import { useAuthStore } from '@/store/authStore';
 import { toast } from 'sonner';
 import { formatRelativeDate } from '@/lib/utils';
 import type { ChatMessage } from '@/types/chat';
+import { marked } from 'marked';
 
 export default function AIChatPage() {
   const { user } = useAuthStore();
@@ -149,7 +150,7 @@ export default function AIChatPage() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {!selectedChatId ? (
             <div className="flex h-full flex-col items-center justify-center text-center">
               <MessageSquare className="h-12 w-12 text-muted-foreground" />
@@ -188,13 +189,21 @@ export default function AIChatPage() {
                 }`}
               >
                 <div
-                  className={`max-w-[80%] rounded-xl px-4 py-2.5 text-sm ${
+                  className={`max-w-[80%] rounded-xl px-4 py-2.5 text-sm overflow-hidden ${
                     msg.role === 'user'
                       ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted text-muted-foreground'
+                      : 'bg-muted text-muted-foreground prose prose-sm max-w-none dark:prose-invert prose-p:leading-relaxed prose-pre:p-0'
                   }`}
                 >
-                  <div className="whitespace-pre-wrap">{msg.content}</div>
+                  {msg.role === 'user' ? (
+                    <div className="whitespace-pre-wrap">{msg.content}</div>
+                  ) : (
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: marked.parse(msg.content, { breaks: true, gfm: true }) as string,
+                      }}
+                    />
+                  )}
                 </div>
               </div>
             ))
