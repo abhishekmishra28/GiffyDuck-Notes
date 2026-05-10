@@ -151,11 +151,6 @@ export default function NoteEditorPage() {
     }
   }, [title, content, markdownSource, tags, isPinned, isArchived, isNew, editorMode]);
 
-  const handleDone = useCallback(() => {
-    handleSave();
-    setIsEditing(false);
-  }, [handleSave]);
-
   const handleTogglePin = useCallback(() => {
     if (!isNew) {
       updateMutation.mutate({ isPinned: !isPinned });
