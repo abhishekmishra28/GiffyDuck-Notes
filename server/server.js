@@ -17,7 +17,7 @@ connectDB();
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cors({
-    origin: ["http://localhost:3000", "http://localhost:5173"],
+    origin: ["http://localhost:3000", "http://localhost:5173", "https://www.giffyduck.com", "https://giffyduck.com"],
     credentials: true
 }));
 app.use(cookieParser());

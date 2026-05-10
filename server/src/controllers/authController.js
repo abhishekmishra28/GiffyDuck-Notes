@@ -162,7 +162,8 @@ exports.forgotPassword = async (req, res) => {
         await user.save({ validateBeforeSave: false });
 
         // 4. Create reset URL
-        const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+        const frontendUrl = process.env.FRONTEND_URL || 'https://www.giffyduck.com';
+        const resetUrl = `${frontendUrl}/reset-password/${resetToken}`;
 
         // 5. Send Email ✅
         await sendEmail({
