@@ -46,7 +46,7 @@ export function sendMessageStream(
   onError: (error: Error) => void
 ) {
   const token = useAuthStore.getState().token;
-  const baseUrl = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? 'https://giffyduck-notes.onrender.com/api' : 'http://localhost:5000/api');
+  const baseUrl = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? 'https://giffyduck-notes-1.onrender.com/api' : 'http://localhost:5000/api');
   const url = `${baseUrl}/ai/message/stream`;
 
   fetch(url, {
