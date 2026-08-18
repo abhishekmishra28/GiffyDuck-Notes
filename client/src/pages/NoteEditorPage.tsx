@@ -214,6 +214,7 @@ export default function NoteEditorPage() {
             <>
               <button
                 onClick={handleTogglePin}
+                data-testid="pin-note"
                 className={`rounded-lg border px-3 py-2 text-sm ${
                   isPinned
                     ? 'border-primary bg-primary/10 text-primary'
@@ -225,6 +226,7 @@ export default function NoteEditorPage() {
               </button>
               <button
                 onClick={handleToggleArchive}
+                data-testid="archive-note"
                 className={`rounded-lg border px-3 py-2 text-sm ${
                   isArchived
                     ? 'border-primary bg-primary/10 text-primary'
@@ -285,6 +287,7 @@ export default function NoteEditorPage() {
               <button
                 onClick={handleSave}
                 disabled={isSaving}
+                data-testid="save-note"
                 className="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
               >
                 {isSaving ? (
@@ -305,6 +308,7 @@ export default function NoteEditorPage() {
                 }
               }}
               disabled={deleteMutation.isPending}
+              data-testid="delete-note"
               className="rounded-lg border border-destructive/30 px-3 py-2 text-sm text-destructive hover:bg-destructive/10 disabled:opacity-50"
             >
               <Trash2 className="h-4 w-4" />
@@ -322,6 +326,7 @@ export default function NoteEditorPage() {
           placeholder="Note title..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          data-testid="note-title"
           className="w-full bg-transparent text-3xl font-bold tracking-tight text-foreground outline-none placeholder:text-muted-foreground"
         />
       )}
@@ -391,6 +396,7 @@ export default function NoteEditorPage() {
               value={markdownSource}
               onChange={(e) => setMarkdownSource(e.target.value)}
               placeholder="Write in markdown..."
+              data-testid="note-content"
               className="min-h-[400px] w-full rounded-2xl border border-border/60 bg-card/60 p-5 font-mono text-sm text-foreground outline-none ring-ring transition-all placeholder:text-muted-foreground backdrop-blur-xl focus:ring-2 resize-y"
               spellCheck={false}
             />

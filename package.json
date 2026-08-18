@@ -1,0 +1,20 @@
+{
+  "name": "giffyduck-notes-main",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">   🦆 GiffyDuck — AI Powered Notes Application </h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:e2e": "cypress run",
+    "cypress:open": "cypress open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "cypress": "^15.20.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2"
+  }
+}

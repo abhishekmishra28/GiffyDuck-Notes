@@ -134,6 +134,7 @@ export function Header({ isAdmin: _isAdmin }: HeaderProps) {
               setUserMenuOpen(!userMenuOpen);
               setThemeMenuOpen(false);
             }}
+            data-testid="user-menu"
             className="flex items-center gap-2 rounded-md p-1.5 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-xs font-bold text-primary">
@@ -173,6 +174,7 @@ export function Header({ isAdmin: _isAdmin }: HeaderProps) {
               )}
               <button
                 onClick={handleLogout}
+                data-testid="logout"
                 className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-destructive hover:bg-destructive/10"
               >
                 <LogOut className="h-4 w-4" />

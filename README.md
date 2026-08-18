@@ -243,6 +243,38 @@ http://localhost:5173
 
 ---
 
+---
+
+# 🧪 Testing
+
+Cypress is used for end-to-end UI and API testing.
+
+Test coverage includes:
+- Authentication
+- Notes CRUD
+- Search
+- RBAC
+- AI assistant
+- API error handling
+- Regression workflows
+
+### Running Tests
+
+To run Cypress tests headlessly (ensure frontend and backend are running):
+```bash
+npm run test:e2e
+```
+
+To open the Cypress UI:
+```bash
+npm run cypress:open
+```
+
+**Test Credentials:**
+The tests use mock data located in `cypress/fixtures/testData.json`. For full E2E testing against your backend, ensure the credentials in the fixture match valid users in your test database, or configure them via Cypress environment variables.
+
+---
+
 # 🚀 Future Improvements
 
 - Real-time collaboration

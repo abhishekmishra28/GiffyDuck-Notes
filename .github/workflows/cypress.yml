@@ -1,0 +1,79 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Root Dependencies (Cypress)
+        run: npm ci
+
+      - name: Install Server Dependencies
+        working-directory: ./server
+        run: npm ci
+
+      - name: Install Client Dependencies
+        working-directory: ./client
+        run: npm ci
+
+      - name: Start Backend Server
+        working-directory: ./server
+        run: npm run dev &
+        env:
+          PORT: 5000
+          MONGODB_URI: mongodb://localhost:27017/giffyduck_test
+          JWT_SECRET: testing_secret
+          # Mock the Gemini API in test environment or use a dummy key
+          GEMINI_API_KEY: dummy_key
+
+      - name: Start Frontend Server
+        working-directory: ./client
+        run: npm run dev &
+
+      - name: Wait for servers to be ready
+        run: |
+          npx wait-on http://localhost:5000/api/health || true
+          npx wait-on http://localhost:5173 || true
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          # We've already started the servers, so we don't need Cypress to start them
+          install: false
+        env:
+          CYPRESS_apiUrl: http://localhost:5000/api
+
+      - name: Upload Screenshots on Failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload Videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos

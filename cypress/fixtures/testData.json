@@ -1,0 +1,20 @@
+{
+  "validUser": {
+    "email": "testuser@example.com",
+    "password": "Password123!",
+    "name": "Test User"
+  },
+  "invalidUser": {
+    "email": "wrong@example.com",
+    "password": "wrongpassword"
+  },
+  "adminUser": {
+    "email": "admin@example.com",
+    "password": "AdminPassword123!"
+  },
+  "note": {
+    "title": "Cypress Test Note",
+    "content": "This is a note created by automated Cypress tests.",
+    "updatedContent": "This note has been updated by Cypress tests."
+  }
+}

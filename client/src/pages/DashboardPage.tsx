@@ -135,6 +135,7 @@ export default function DashboardPage() {
                 placeholder="Search notes by title, content, or tags..."
                 value={search}
                 onChange={(e) => handleSearchChange(e.target.value)}
+                data-testid="search-input"
                 className="w-full rounded-xl border border-input bg-background/60 py-2 pl-10 pr-4 text-sm text-foreground outline-none ring-ring transition-all placeholder:text-muted-foreground backdrop-blur-sm focus:ring-2"
               />
             </div>
@@ -166,6 +167,7 @@ export default function DashboardPage() {
             {/* New Note */}
             <Link
               to="/dashboard/notes/new"
+              data-testid="create-note"
               className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm shadow-primary/20 transition-all hover:bg-primary/90 hover:shadow-md hover:shadow-primary/30"
             >
               <Plus className="h-4 w-4" />
@@ -193,6 +195,7 @@ export default function DashboardPage() {
             {!search && (
               <Link
                 to="/dashboard/notes/new"
+                data-testid="create-note-empty"
                 className="mt-4 flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90"
               >
                 <Plus className="h-4 w-4" />
